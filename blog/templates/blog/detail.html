@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container jumbotron">
+        <h1>{{ blog_detail.title }}</h1>
+        <p>{{ blog_detail.pub_date }}</p>
+        <p>{{ blog_detail.body }}</p>
+        <a href="{% url 'home' %}">돌아가기</a>
+    </div>
+
+
+       <div class = "card my-4, w-50 p-3">    
+            <h5 class = "card-header">댓글</h5>
+            <div class = "card-body">
+                <form method = "POST">
+                {% csrf_token %}
+                    <div class = "form-group">{{comment_form.as_p}}</div>
+                    <button type = "submit" class = "btn btn-primary">작성하기</button>
+                </form>
+            </div>
+        </div>    
+         
+        {% for comment in comments %}
+        
+            <div class="media mb-4">
+                <span><div class="media-body">
+                <div class = "comment, text-right">
+                <a href = "{% url 'comment_update' comment.id %}"><button type="button" class="btn btn-outline-info">수정</button></a>
+                <a href = "{% url 'comment_delete' comment.id %}"><button type="button" class="btn btn-outline-info">삭제</button></a>
+                   </div> 
+                    <strong><h5 class="mt-0">{{ comment.comment_user }}</h5></strong>
+                    <h5 class="mt-0">{{ comment.comment_date}}</h5>
+                    <h5 class="mt-0">{{ comment.comment_textfield }}</h5>
+                </div>
+                <span>
+            </div>
+ 
+
+ 
+        {% endfor %}
+
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class = "card my-4, w-50 p-3">
+            <h5 class = "card-header">댓글</h5>
+            <div class = "card-body">
+                <form method = "POST">
+                {% csrf_token %}
+                <div class = "form-group">{{comment_form.as_p}}</div>
+                <button type = "submit" class = "btn btn-primary">수정하기</button>
+                </form>
+         
+            </div>    
+
+{% endblock %}
